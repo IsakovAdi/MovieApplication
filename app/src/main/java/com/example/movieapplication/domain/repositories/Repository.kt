@@ -4,11 +4,9 @@ import com.example.movieapplication.domain.models.Results
 import retrofit2.Response
 
 interface Repository {
-    suspend fun getPopular(apiKey: String, language: String, page: Int): Response<Results>
-    suspend fun getTopRated(apiKey: String, language: String, page: Int): Response<Results>
-    suspend fun getUpComing(apiKey: String, language: String, page: Int): Response<Results>
-    suspend fun getNowPlaying(apiKey: String, language: String, page: Int): Response<Results>
-    suspend fun searchMovie(apiKey: String, language: String, query: String): Response<Results>
-//        return RetrofitInstance.api.search(apiKey, language, query)
-
+    suspend fun getPopular(language: String, page: Int): Response<Results>
+    suspend fun getTopRated(language: String, page: Int): Response<Results>
+    suspend fun getUpComing(language: String, page: Int): Response<Results>
+    suspend fun getNowPlaying(language: String, page: Int): Response<Results>
+    suspend fun searchMovie(language: String, query: String): Response<Results>
 }
