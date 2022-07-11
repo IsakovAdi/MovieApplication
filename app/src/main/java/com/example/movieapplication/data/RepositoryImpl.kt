@@ -37,7 +37,5 @@ object RepositoryImpl : Repository {
     override suspend fun searchMovie(
         language: String,
         query: String
-    ): Response<Results> {
-        TODO("Not yet implemented")
-    }
+    ): Response<Results> = RetrofitInstance.api.search(Utils.API_KEY, language, query)
 }
