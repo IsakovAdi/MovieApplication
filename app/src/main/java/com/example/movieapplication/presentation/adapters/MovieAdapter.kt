@@ -10,6 +10,8 @@ import com.example.movieapplication.presentation.callbacks.MovieDiffCallback
 import com.example.movieapplication.presentation.viewholders.MovieViewHolder
 
 class MovieAdapter:ListAdapter<Movie, MovieViewHolder>(MovieDiffCallback()) {
+
+    var onMovieItemClickListener:((Movie) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder  =
         MovieViewHolder(
             MovieBinding.bind(
@@ -18,6 +20,9 @@ class MovieAdapter:ListAdapter<Movie, MovieViewHolder>(MovieDiffCallback()) {
         )
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+        holder.binding.root.setOnClickListener {
+            onMovieItemClickListener?.invoke(getItem(position))
+        }
         holder.bind(getItem(position))
     }
 }

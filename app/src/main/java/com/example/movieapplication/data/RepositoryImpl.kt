@@ -1,6 +1,7 @@
 package com.example.movieapplication.data
 
 import com.example.movieapplication.domain.Utils
+import com.example.movieapplication.domain.models.Movie
 import com.example.movieapplication.domain.models.Results
 import com.example.movieapplication.domain.repositories.Repository
 import retrofit2.Response
@@ -38,4 +39,13 @@ object RepositoryImpl : Repository {
         language: String,
         query: String
     ): Response<Results> = RetrofitInstance.api.search(Utils.API_KEY, language, query)
+
+    override suspend fun getMovie(
+        movieId: Int,
+        language: String
+    ): Response<Movie> = RetrofitInstance.api.getMovieDetails(
+        movieId,
+        Utils.API_KEY,
+        language
+    )
 }

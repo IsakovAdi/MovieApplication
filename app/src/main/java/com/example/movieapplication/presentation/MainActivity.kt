@@ -1,5 +1,6 @@
 package com.example.movieapplication.presentation
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -43,6 +44,8 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener,
             adapter = arrayAdapter
             onItemSelectedListener = this@MainActivity
         }
+
+        setupClickListener()
     }
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
@@ -52,7 +55,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener,
             2 -> viewModel.getTopRatedMovies(language = "ru", 1)
             3 -> viewModel.getUpcomingMovies(language = "ru", 1)
         }
-
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) = Unit
@@ -66,5 +68,14 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener,
         if (searchText != null) viewModel.getSearchMovies("ru", searchText)
         else viewModel.getPopularMovies(language = "ru", 1)
         return false
+    }
+
+    private fun setupClickListener(){
+        movieAdapter.onMovieItemClickListener = {
+            val intent = Intent(this, DetailsActivity::class.java)
+            val movieId = it.id
+            intent.putExtra("movieID", movieId)
+            startActivity(intent)
+        }
     }
 }
